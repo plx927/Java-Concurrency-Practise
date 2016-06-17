@@ -7,13 +7,26 @@ import java.util.concurrent.CyclicBarrier;
 
 /**
  * Created by panlingxiao on 2016/6/16.
+ * 模拟官方给出的例子,完成一个矩阵的运算:
+ * 1.每个线程处理完成自己每一行的计算结果执行,到达“barrier point”,然后等待其他线程
+ * 2.当所有的线程到达“barrier point”,最后一个到达的线程执行barrier action来完成结果的汇总。
+ * 3.在执行完成barrier action之后,唤醒处于等待状态的线程。
  */
 public class CyclicBarrierTest {
 
     static boolean isDone = false;
 
     public static void main(String[] args) throws InterruptedException {
-        final float[][] matrix = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
+        final float[][] matrix = {
+                {1, 2, 3},
+                {4, 5, 6},
+                {7, 8, 9},
+                {10,11,12},
+                {10,11,12},
+                {7, 8, 9},
+                {4, 5, 6},
+                {1, 2, 3}
+        };
         Solver solver = new Solver(matrix);
     }
 
