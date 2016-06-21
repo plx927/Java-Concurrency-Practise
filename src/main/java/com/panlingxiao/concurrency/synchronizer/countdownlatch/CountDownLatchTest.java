@@ -1,4 +1,4 @@
-package com.panlingxiao.concurrency.synchronizer;
+package com.panlingxiao.concurrency.synchronizer.countdownlatch;
 
 import java.util.concurrent.CountDownLatch;
 
