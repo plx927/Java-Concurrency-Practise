@@ -1,5 +1,6 @@
 package com.panlingxiao.concurrency.lock;
 
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
@@ -15,6 +16,40 @@ public class ReentrantLockTest {
     static ReentrantLock lock = new ReentrantLock();
 
     public static void main(String[] args) {
-        lock.lock();
+        final CountDownLatch latch = new CountDownLatch(1);
+        new Thread(){
+            @Override
+            public void run() {
+                try{
+                    //ReentrantLock具有可重入性
+                    lock.lock();
+                    lock.lock();
+                    System.out.println("Lock test!");
+                    latch.countDown();
+                }finally {
+                    lock.unlock();
+                    lock.unlock();
+                }
+            }
+        }.start();
+
+        new Thread(){
+            @Override
+            public void run() {
+                try {
+                    latch.await();
+                    lock.lock();
+                    /*
+                     * 当锁被其他线程所占用时，ReentrantLock会是当前线程进入到等待状态
+                     * 而使用synchronized(内置锁)，在会让线程进入到阻塞状态
+                     */
+                    System.out.println("Lock test2");
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }finally {
+                    lock.unlock();
+                }
+            }
+        }.start();
     }
 }
