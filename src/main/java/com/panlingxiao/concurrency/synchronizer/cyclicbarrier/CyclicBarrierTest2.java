@@ -1,4 +1,4 @@
-package com.panlingxiao.syn.aid;
+package com.panlingxiao.concurrency.synchronizer.cyclicbarrier;
 
 import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CountDownLatch;
