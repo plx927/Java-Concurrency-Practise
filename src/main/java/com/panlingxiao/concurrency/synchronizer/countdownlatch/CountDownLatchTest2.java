@@ -16,9 +16,10 @@ public class CountDownLatchTest2 {
         for (int i = 0; i < N; i++) {
             new Thread(new Worker(startSignal, doneSignal),"线程"+i).start();
         }
-
+        //当主线程执行完毕后，将countDownLatch的count值设置为0，让其他线程继续执行
         doSomethingElse();
         startSignal.countDown();
+        //主线程进入到等待状态,直到其他线程都执行countDown，将count值设置0时，主线程才继续执行
         doneSignal.await();
         doSomethingElse2();
     }
