@@ -23,3 +23,8 @@ AQS的等待队列时CLH锁队列的变种。CLH锁通常用于自旋锁。
 在AQS的的等待队列中，每一个节点的status字段用于维系追踪一个线程是否应该被阻塞。一个节点会被通知当其前驱节点被释放时。
 队列中的每个节点作为"特定通知风格"的监视器，它只有唯一的等待线程。
 节点的状态字段无法用于控制线程是否被授权锁。当一个线程第一次进入队列时，它会尝试去获取，如果第一次无法获取成功，那么它只能被给与重新竞争的权力。
+
+
+#### ThreadLocal
+每一个线程内部都维护着一个ThreadLocalMap，ThreadLocalMap是一个定制化的HashMap，其key为ThreadLocal,value是绑定到线程中的值。
+在ThreadLocalMap中对值进行查询是通过ThreadLocal底层所维护的threadLocalHashCode来完成的。
