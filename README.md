@@ -2,21 +2,21 @@
 
 >个人并发编程练习以及总结
 
-### 同步工具类
+## 同步工具类
 
-#### ReentrantLock 
+### ReentrantLock 
 
-#### CylicBarrier
+### CylicBarrier
 Barrier为"栅栏"的意思,在此表示阻塞线程继续执行，让线程进入到等待状态(TIMED_WAITING)。 
 当所有线程都到达"栅栏"点时，栅栏就会倒下(tripped),此时会由最后一个线程执行"栅栏"中的Barrier Action, 在执行之后,所有的线程就能继续往下执行。
 在CyclicBarrier中，每一次使用CylicBarrier都使用一个Generation来表示,在使用完成之后,会生成一个新的Generation来表示下一次的使用。
 
 
 
-#### CountDownLatch
+### CountDownLatch
 
 
-#### AbstractQueuedSynchronizer
+### AbstractQueuedSynchronizer
 AQS通过其内部的一个**先进先出的等待队列**，为**阻塞锁**和**同步器**提供了一个框架的实现。
 这些同步器的有一个特点：它们通过一个唯一原子int型可以变量来表示其状态。
 子类必须定义AQS中所提供的protected的方法来去改变状态，根据同步器被线程获取或者释放来定义状态的含义。
@@ -31,6 +31,11 @@ AQS的等待队列时CLH锁队列的变种。CLH锁通常用于自旋锁。
 节点的状态字段无法用于控制线程是否被授权锁。当一个线程第一次进入队列时，它会尝试去获取，如果第一次无法获取成功，那么它只能被给与重新竞争的权力。
 
 
-#### ThreadLocal
+### ThreadLocal
 每一个线程内部都维护着一个ThreadLocalMap，ThreadLocalMap是一个定制化的HashMap，其key为ThreadLocal,value是绑定到线程中的值。
 在ThreadLocalMap中对值进行查询是通过ThreadLocal底层所维护的threadLocalHashCode来完成的。
+
+
+
+### 锁竞争问题
+参考:http://www.ibm.com/developerworks/cn/java/j-lo-lock/#icomments

@@ -1,4 +1,4 @@
-package com.panlingxiao.concurrency.synchronizer;
+package com.panlingxiao.concurrency.visablity;
 
 /**
  * Created by panlingxiao on 2016/7/30.
