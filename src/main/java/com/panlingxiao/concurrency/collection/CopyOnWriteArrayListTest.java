@@ -12,12 +12,42 @@ import java.util.concurrent.CopyOnWriteArrayList;
 public class CopyOnWriteArrayListTest {
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
 
         //concurrentModifyTest();
 
-        copyOnWrite();
+        //copyOnWrite();
+        concurrentAdd();
+    }
 
+
+    /**
+     * 对比{@link TestUnsafeList#main(String[])}方法进行对比
+     * @throws InterruptedException
+     */
+    public static  void concurrentAdd() throws InterruptedException {
+        final List<String> list = new CopyOnWriteArrayList<String>();
+        final int THREAD_NUM = 3;
+        final int ADD_NUM = 10000;
+        final Thread[] threads = new Thread[THREAD_NUM];
+        //启动3个线程,并发添加数据到集合中，理论上应该添加30000个元素
+        for (int i = 0; i < THREAD_NUM; i++) {
+            threads[i] = new Thread() {
+                @Override
+                public void run() {
+                    for (int i = 0; i < ADD_NUM; i++) {
+                        list.add(String.valueOf(i));
+                    }
+                }
+            };
+            threads[i].start();
+        }
+
+        for (Thread thread : threads) {
+            thread.join();
+        }
+
+        System.out.println(list.size());
     }
 
     /**
@@ -40,7 +70,7 @@ public class CopyOnWriteArrayListTest {
     /**
      * 在迭代集合时，对集合的结构进行修改引发ConcurrentModificationException
      */
-    static void concurrentModifyTest() {
+    static void concurrentModifyArrayList() {
         List<String> list = new ArrayList<String>(Arrays.asList("hello", "world", "Java"));
         for(Iterator<String> iterator = list.iterator();iterator.hasNext(); ){
             String next = iterator.next();
