@@ -81,6 +81,9 @@ AQS的等待队列时CLH锁队列的变种。CLH锁通常用于自旋锁。
 
 ## 5、并发集合
 
+### Queue
+
+
 ### ArrayBlockingQueue
 
 ### LinkedBlockingQueue
