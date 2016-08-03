@@ -89,6 +89,8 @@ AQS的等待队列时CLH锁队列的变种。CLH锁通常用于自旋锁。
 ### LinkedBlockingQueue
 
 ### ConcurrentLinkedQueue
+http://www.cs.rochester.edu/u/michael/PODC96.html
+http://www.infoq.com/cn/articles/ConcurrentLinkedQueue
 
 ### CopyOnWriteArrayList
 
