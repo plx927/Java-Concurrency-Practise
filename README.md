@@ -5,8 +5,8 @@
 ## 1、Thread 基础
 
 ### 理解并发(Concurrent)和并行(Parallel)的区别
-http://ifeve.com/parallel_and_con/
-http://www.cnblogs.com/yangecnu/p/3164167.html
+- http://ifeve.com/parallel_and_con/
+- http://www.cnblogs.com/yangecnu/p/3164167.html
 
 
 
