@@ -1,4 +1,4 @@
-package com.panlingxiao.concurrency.collection;
+package com.panlingxiao.concurrency.collection.waitfree;
 
 import java.util.concurrent.ConcurrentLinkedQueue;
 

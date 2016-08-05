@@ -1,4 +1,4 @@
-package com.panlingxiao.concurrency.collection;
+package com.panlingxiao.concurrency.collection.blockingqueue;
 
 /**
  * Created by panlingxiao on 2016/8/4.

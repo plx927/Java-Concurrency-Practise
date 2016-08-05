@@ -1,4 +1,6 @@
-package com.panlingxiao.concurrency.collection;
+package com.panlingxiao.concurrency.collection.copyonwrite;
+
+import com.panlingxiao.concurrency.collection.unsafe.TestUnsafeList;
 
 import java.util.ArrayList;
 import java.util.Arrays;

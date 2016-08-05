@@ -4,6 +4,12 @@
 
 ## 1、Thread 基础
 
+### 理解并发(Concurrent)和并行(Parallel)的区别
+http://ifeve.com/parallel_and_con/
+http://www.cnblogs.com/yangecnu/p/3164167.html
+
+
+
 ### 线程中断(Thread Interrupt)
 通过Thread#interrupt方法来中断线程的执行。如果interrupt不是当前线程，那么该方法底层会去检查其是否有执行权限，如果没有，会抛出一个SecurityException。
 interrupt()方法的本质是设置当前线程的*中断标志位*。

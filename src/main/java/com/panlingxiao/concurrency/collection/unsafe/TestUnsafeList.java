@@ -1,4 +1,4 @@
-package com.panlingxiao.concurrency.collection;
+package com.panlingxiao.concurrency.collection.unsafe;
 
 import java.util.ArrayList;
 import java.util.List;
