@@ -106,11 +106,6 @@
 - 所有的非守护线程死亡、所有的非守护线程结束run方法执行、所有的非守护线程在run方法中抛出异常并且没有被捕获时，在JVM也会退出执行。
 
 
-
-
-
-
-
 ### 线程中断(Thread Interrupt)
 通过Thread#interrupt方法来中断线程的执行。如果interrupt不是当前线程，那么该方法底层会去检查其是否有执行权限，如果没有，会抛出一个SecurityException。
 interrupt()方法的本质是设置当前线程的*中断标志位*。
@@ -138,6 +133,19 @@ interrupt()方法的本质是设置当前线程的*中断标志位*。
         interrupt0();
     }
 ```
+
+
+### Synchronized
+
+常见问题:
+
+- 对静态方法使用synchronized关键字，加锁的对象是谁?
+- 实现线程安全单例的几种方式
+
+
+
+### Notify & Wait
+
 
 
 ## 2、CAS 操作
