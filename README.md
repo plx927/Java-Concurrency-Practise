@@ -9,6 +9,107 @@
 - http://www.cnblogs.com/yangecnu/p/3164167.html
 
 
+### 创建线程的两种方式
+
+#### 继承Thread类，重写run()方法
+
+```
+    class MyThread extends Thread{
+        @Override
+        public void run(){
+        
+          doSomething();
+        }
+    }
+    
+    public static void main(String[] args){
+        Thread t = new MyThread();
+        t.start();
+    }
+```
+
+#### 实现Runnable接口
+
+```
+    public MyTask implements Runnable{
+        public void run(){
+            doSomething();
+        }
+    }
+    
+    public static void main(String[] args){
+    
+        //作为参数传递给Thread来执行run方法中的代码
+        Thread t = new Thread(new MyTask());
+        t.start();
+    }
+        
+```
+
+### 源码分析start方法的本质以及分析两种实现方式的比较
+
+```
+    
+ public synchronized void start() {
+        /**
+         * This method is not invoked for the main method thread or "system"
+         * group threads created/set up by the VM. Any new functionality added
+         * to this method in the future may have to also be added to the VM.
+         *
+         * A zero status value corresponds to state "NEW".
+         */
+        if (threadStatus != 0)
+            throw new IllegalThreadStateException();
+
+        /* Notify the group that this thread is about to be started
+         * so that it can be added to the group's list of threads
+         * and the group's unstarted count can be decremented. */
+        group.add(this);
+
+        boolean started = false;
+        try {
+            //调用start方法，最终会调用start0方法。
+            start0();
+            started = true;
+        } finally {
+            try {
+                if (!started) {
+                    group.threadStartFailed(this);
+                }
+            } catch (Throwable ignore) {
+                /* do nothing. If start0 threw a Throwable then
+                  it will be passed up the call stack */
+            }
+        }
+    }
+
+```
+
+通过上面的代码可以看到，用户调用线程的start方法，其本质是调用了native的start0()方法，start0()将*当前对象以一个线程的方式启动并且自动调用run方法来进行执行*。
+*Thread对象的start方法只能被调用一次，如果多次调用，会抛出IllegalThreadStateException。线程一旦死亡，线程就无法再次重新启动。*
+
+*思考:为什么要对start方法加上synchronized关键字?*
+
+```
+  @Override
+    public void run() {
+        if (target != null) {
+            target.run();
+        }
+    }
+
+```
+
+>当JVM启动的时候，通常会启动一个非守护线程(主线程),它所执行的代码就是main()方法中的内容。当JVM遇到如下的情况会退出：
+
+- 调用System.exit()方法来强制终止JVM执行。
+- 所有的非守护线程死亡、所有的非守护线程结束run方法执行、所有的非守护线程在run方法中抛出异常并且没有被捕获时，在JVM也会退出执行。
+
+
+
+
+
+
 
 ### 线程中断(Thread Interrupt)
 通过Thread#interrupt方法来中断线程的执行。如果interrupt不是当前线程，那么该方法底层会去检查其是否有执行权限，如果没有，会抛出一个SecurityException。

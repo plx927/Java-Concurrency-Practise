@@ -36,23 +36,21 @@ public class CreateThreadTest {
 
         Thread thread1 = new MyThread();
         Thread thread2 = new MyThread();
-        /**
-         * 错误地使用run方法来启动线程，这样的执行结果为串行执行。
-         */
+
 //        thread1.start();
 //        thread2.start();
 
-
+        /**
+         * 错误地使用run方法来启动线程，这样的执行结果为串行执行。
+         */
 //        thread1.run();
 //        thread2.run();
-
-
 
         Runnable runnable = new MyTask();
         Thread thread3 = new Thread(thread1);
         Thread thread4 = new Thread(thread2);
         thread3.start();
-        thread4.start();
+        //thread4.start();
 
         /*
          * IO密集型和计算密集型
@@ -63,6 +61,8 @@ public class CreateThreadTest {
 //        int core = Runtime.getRuntime().availableProcessors();
 //        Executors.newFixedThreadPool(core);
 
+
+        //Command Design Pattern /Strategy Design Pattern
     }
 
     /**
@@ -77,6 +77,10 @@ public class CreateThreadTest {
         }
     }
 
+
+    /**
+     * 通过实现Runnable接口的方法来创建线程
+     */
     static class MyTask implements Runnable{
         @Override
         public void run() {
