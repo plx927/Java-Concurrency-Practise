@@ -206,6 +206,8 @@ AQS的等待队列时CLH锁队列的变种。CLH锁通常用于自旋锁。
 ### ConcurrentLinkedQueue
 http://www.cs.rochester.edu/u/michael/PODC96.html
 http://www.infoq.com/cn/articles/ConcurrentLinkedQueue
+http://www.ibm.com/developerworks/cn/java/j-lo-concurrent/index.html
+
 ConcurrentLinkedQueue节点的一致性:
 
 (1).最后一个节点的next是null，在优化的情况下，最后一个节点在入队列的时候，时间复杂度可以到达o(1)。
@@ -223,7 +225,7 @@ ConcurrentLinkedQueue节点的一致性:
 
 
 ## 6.线程池
-
+http://www.infoq.com/cn/articles/the-importance-of-thread-pool-in-java-web-application?utm_campaign=rightbar_v2&utm_source=infoq&utm_medium=articles_link&utm_content=link_text
 
 
 ### ThreadLocal
