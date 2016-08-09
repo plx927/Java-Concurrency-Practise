@@ -6,29 +6,48 @@ package com.panlingxiao.concurrency.singleton;
 public class DoubleCheckSingleton {
 
 
-    private static DoubleCheckSingleton singleton ;
-    private DoubleCheckSingleton(){
+    private static DoubleCheckSingleton singleton;
+
+    private DoubleCheckSingleton() {
     }
 
-    /**
-     *
-     * @return
-     */
-    public static  synchronized  DoubleCheckSingleton getInstance(){
-        if(singleton == null){
-            try {
-                Thread.sleep(10);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            singleton = new DoubleCheckSingleton();
+//    /**
+//     * 静态方法锁DoubleCheckSingleton.class
+//     *
+//     * @return
+//     */
+//    public static synchronized DoubleCheckSingleton getInstance() {
+//        if (singleton == null) {
+//            try {
+//                Thread.sleep(10);
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+//            singleton = new DoubleCheckSingleton();
+//        }
+//        return singleton;
+//    }
+
+
+    public static DoubleCheckSingleton getInstance() {
+        if (singleton == null) {
+                synchronized (DoubleCheckSingleton.class) {
+                    try {
+                        Thread.sleep(10);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    if (singleton == null) {
+                        singleton = new DoubleCheckSingleton();
+                    }
+                }
         }
         return singleton;
     }
 
 
     public static void main(String[] args) {
-        new Thread(){
+        new Thread() {
             @Override
             public void run() {
                 System.out.println(DoubleCheckSingleton.getInstance());
@@ -36,7 +55,7 @@ public class DoubleCheckSingleton {
         }.start();
 
 
-        new Thread(){
+        new Thread() {
             @Override
             public void run() {
                 System.out.println(DoubleCheckSingleton.getInstance());

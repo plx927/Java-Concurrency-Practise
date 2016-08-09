@@ -204,16 +204,22 @@ AQS的等待队列时CLH锁队列的变种。CLH锁通常用于自旋锁。
 ### LinkedBlockingQueue
 
 ### ConcurrentLinkedQueue
-http://www.cs.rochester.edu/u/michael/PODC96.html
-http://www.infoq.com/cn/articles/ConcurrentLinkedQueue
-http://www.ibm.com/developerworks/cn/java/j-lo-concurrent/index.html
-http://www.cnblogs.com/linjiqin/archive/2013/05/30/3108188.html
 
-ConcurrentLinkedQueue节点的一致性:
+##### ConcurrentLinkedQueue分析
 
-(1).最后一个节点的next是null，在优化的情况下，最后一个节点在入队列的时候，时间复杂度可以到达o(1)。
 
-(2).
+
+##### ConcurrentLinkedQueue的size()问题:
+
+##### 参考:
+(1). http://www.cs.rochester.edu/u/michael/PODC96.html
+
+(2). http://www.infoq.com/cn/articles/ConcurrentLinkedQueue
+
+(3). http://www.ibm.com/developerworks/cn/java/j-lo-concurrent/index.html
+
+(4). http://www.cnblogs.com/linjiqin/archive/2013/05/30/3108188.html
+
 
 
 

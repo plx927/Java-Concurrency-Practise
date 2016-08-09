@@ -10,25 +10,48 @@ public class CASEnque {
 
     public static void main(String[] args) {
         final ConcurrentLinkedQueue<String> queue = new ConcurrentLinkedQueue<>();
-        //CAS预先入队列，解决IDEA调式中出现的坑
+        /*
+         * CAS预先入队列，解决IDEA调式中出现的坑
+         *
+         * 构建出队列的结构:
+         * --------------------------------------------------------------------
+         * 在Idea下执行完下面的代码后，队列的结构为:
+         *
+         *  Head             Tail
+         *    |                 |
+         *  Node(Java)-----> Node(Python) ---->Node(Docker)
+         *
+         *  正常执行的后队列的结构为:
+         *
+         *  Head                          Tail
+         *   |                             |
+         *  Node(null)---->Node(Java)---->Node(Python)---->Node(Docker)
+         *
+         * ---------------------------------------------------------------------
+         */
         queue.offer("Java");
         queue.offer("Python");
         queue.offer("Docker");
 
-        Thread[] threads = new Thread[10];
-        for(int i = 0;i < threads.length;i++){
-            final int k = i;
-            threads[i] = new Thread("线程:"+i){
-                @Override
-                public void run() {
-                    for(int j = 0;j < 100;j++){
-                        String str = getName() + "--hello:" + k;
-                        queue.offer(str);
-                    }
-                }
-            };
-            threads[i].start();
-        }
+
+//        queue.poll();
+//        queue.poll();
+//        queue.poll();
+
+//        Thread[] threads = new Thread[10];
+//        for (int i = 0; i < threads.length; i++) {
+//            final int k = i;
+//            threads[i] = new Thread("线程:" + i) {
+//                @Override
+//                public void run() {
+//                    for (int j = 0; j < 100; j++) {
+//                        String str = getName() + "--hello:" + k;
+//                        queue.offer(str);
+//                    }
+//                }
+//            };
+//            threads[i].start();
+//        }
 
 
         //变态的语法
