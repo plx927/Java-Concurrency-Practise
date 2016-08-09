@@ -207,6 +207,7 @@ AQS的等待队列时CLH锁队列的变种。CLH锁通常用于自旋锁。
 http://www.cs.rochester.edu/u/michael/PODC96.html
 http://www.infoq.com/cn/articles/ConcurrentLinkedQueue
 http://www.ibm.com/developerworks/cn/java/j-lo-concurrent/index.html
+http://www.cnblogs.com/linjiqin/archive/2013/05/30/3108188.html
 
 ConcurrentLinkedQueue节点的一致性:
 
