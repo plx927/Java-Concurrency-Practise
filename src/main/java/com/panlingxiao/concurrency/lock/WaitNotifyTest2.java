@@ -1,10 +1,10 @@
-package com.panlingxiao.concurrency.thread;
+package com.panlingxiao.concurrency.lock;
 
 /**
  * Created by panlingxiao on 2016/8/9.
  * 多线程通信时使用notify引发所有线程都处于wait的情况
  */
-public class WaitNotifyTest {
+public class WaitNotifyTest2 {
 
     static int counter = 0;
     static Object lock = new Object();
