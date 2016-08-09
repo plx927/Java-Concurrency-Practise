@@ -28,16 +28,16 @@ public class ConditionExample {
         @Override
         public void run() {
             try {
-                lock.lock();
                 while (counter < 30) {
-                    while (counter % 3 != 0) {
+                    lock.lock();
+                    while ((counter % 3) != 0) {
                         conditionA.await();
                     }
-                    if(counter < 30) {
-                        System.out.println("A" + counter);
+                    if (counter < 30) {
                         counter++;
-                        conditionB.signal();
+                        System.out.println("A" + counter);
                     }
+                    conditionB.signal();
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -52,16 +52,16 @@ public class ConditionExample {
         @Override
         public void run() {
             try {
-                lock.lock();
                 while (counter < 30) {
-                    while (counter % 3 != 1) {
+                    lock.lock();
+                    while ((counter % 3) != 1) {
                         conditionB.await();
                     }
-                    if(counter < 30) {
-                        System.out.println("B" + counter);
+                    if (counter < 30) {
                         counter++;
-                        conditionC.signal();
+                        System.out.println("B" + counter);
                     }
+                    conditionC.signal();
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -76,16 +76,16 @@ public class ConditionExample {
         @Override
         public void run() {
             try {
-                lock.lock();
                 while (counter < 30) {
-                    while (counter % 3 != 2) {
+                    lock.lock();
+                    while ((counter % 3) != 2) {
                         conditionC.await();
                     }
-                    if(counter < 30) {
-                        System.out.println("C" + counter);
+                    if (counter < 30) {
                         counter++;
-                        conditionA.signal();
+                        System.out.println("C" + counter);
                     }
+                    conditionA.signal();
                 }
             } catch (Exception e) {
                 e.printStackTrace();
