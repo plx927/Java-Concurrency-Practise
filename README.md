@@ -242,4 +242,10 @@ http://www.infoq.com/cn/articles/the-importance-of-thread-pool-in-java-web-appli
 
 
 ### 锁竞争问题
-参考:http://www.ibm.com/developerworks/cn/java/j-lo-lock/#icomments
+参考: http://www.ibm.com/developerworks/cn/java/j-lo-lock/#icomments
+
+
+
+### 思考练习
+
+http://www.iteye.com/topic/711162
