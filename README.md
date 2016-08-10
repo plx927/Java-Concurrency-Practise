@@ -235,9 +235,16 @@ AQS的等待队列时CLH锁队列的变种。CLH锁通常用于自旋锁。
 http://www.infoq.com/cn/articles/the-importance-of-thread-pool-in-java-web-application?utm_campaign=rightbar_v2&utm_source=infoq&utm_medium=articles_link&utm_content=link_text
 
 
-### ThreadLocal
+## 7.ThreadLocal
 每一个线程内部都维护着一个ThreadLocalMap，ThreadLocalMap是一个定制化的HashMap，其key为ThreadLocal,value是绑定到线程中的值。
 在ThreadLocalMap中对值进行查询是通过ThreadLocal底层所维护的threadLocalHashCode来完成的。
+
+
+
+## 8.多线程之设计模式
+
+### Future模式
+
 
 
 
