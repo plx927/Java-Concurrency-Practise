@@ -4,7 +4,7 @@ package com.panlingxiao.concurrency.thread;
  * Created by panlingxiao on 2016/8/1.
  * 线程中断问题
  */
-public class ThreadInterrupt {
+public class ThreadInterruptTest {
 
     public static void main(String[] args) {
         /**
