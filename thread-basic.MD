@@ -1,10 +1,10 @@
 # Java多线程基础篇
 
-## 理解并发(Concurrent)和并行(Parallel)的区别
+## 1、理解并发(Concurrent)和并行(Parallel)的区别
 - http://ifeve.com/parallel_and_con/
 - http://www.cnblogs.com/yangecnu/p/3164167.html
 
-## 线程的创建及执行原理分析
+## 2、线程的创建及执行原理分析
 
 ### 继承Thread类
 第一种创建的方式是通过继承Thread类，重写Thread类的run()方法来完成线程的创建，代码如下:
@@ -55,7 +55,13 @@ FutureTask自身就是一个Runnable接口的实现类，其作用是可以将�
 参考代码：com.panlingxiao.concurrency.thread.CreateThreadTest3
 
 
-## 线程信息及线程状态
+
+### 初学者容器犯的错误
+- 使用run方法来启动线程
+- 多次调用Thread的start()方法
+
+
+## 3、线程信息及线程状态
 
 
 
@@ -64,12 +70,19 @@ FutureTask自身就是一个Runnable接口的实现类，其作用是可以将�
 
 
 
+### 线程中断
 
 
 
 
-## ThreadGroup
-线程组的目的是为了降低对线程管理的复杂度，在Java中提供了`java.lang.ThreadGroup`来表示线程组。线程组由一组线程组成，初次以外，它还可以包含其他的线程组。
+
+## 4、ThreadGroup
+当我们在编写网络应用程序时(使用传统的BIO)，通常情况下我们通过一个线程去等待接收客户端的请求，获取到请求后就去处理相应的处理，比如数据库事务或者更加复杂的计算等等。
+用于等待接收客户端请求线程会创建一个新的线程来处理客户端的请求。当客户端的请求越多，此时就会有大量的线程产生，因此我们的应用程序对于这些线程将会变得难以管理。而为了简化
+对于线程的管理，应用程序可以将这些处理客户端请求的线程放入到一个线程组中来进行统一管理，因此线程组的目的是为了降低对线程管理的复杂度，在Java中提供了`java.lang.ThreadGroup`来表示线程组。
+线程组代理了一组线程的集合，线程组除了可以包含线程意外，它还可以包含其他的线程组(即子线程组)。
+
+随着应用程序的复杂以及线程、线程组的增多，线程组之间最终会形成一个树桩结构。
 
                            system
  
@@ -91,7 +104,7 @@ FutureTask自身就是一个Runnable接口的实现类，其作用是可以将�
 my thread一个线程。
 在了解了上面的基本概念后，下面让我们开始学习线程组的基本使用。
 
-### ThreadGroup基本使用
+### 4.1 ThreadGroup基本使用
 ThreadGroup中提供了两个构造public的构造方法:ThreadGroup(String name) and ThreadGroup(ThreadGroup parent, String name)。这两个构造方法在使用时都需要指定构造方法的名字来作为线程组的标示。
 这两个方法的不同之处在于在创建线程组时是否为其显示指定父线程组。对于每一个线程组，除了system线程组以外，其他线程都**必须有一个父线程组**。对于使用ThreadGroup(String name)方法所创建的线程组，它的parent
 是调用ThreadGroup(String name)方法的线程所在的线程组。比如我们在main方法中调用ThreadGroup(String name)方法，那么新建的线程组的parent就是main线程组。对于ThreadGroup(ThreadGroup parent, String name)
@@ -104,12 +117,20 @@ ThreadGroup中提供了两个构造public的构造方法:ThreadGroup(String name
     ThreadGroup tg2 = new ThreadGroup(tg1,"tg2");
 ```
 
+### 4.2 中断线程组
+ThreadGroup的interrupt()方法允许一个线程去中断指定的一个线程组中的线程以及该线程组所包含的子线程组。这个技术可以适用于如下的应用场景:我们应用的main线程创建了多个线程，每一个线程
+都执行整体任务的部分单元。其中任何线程想要检查执行结果的前提必须是所有线程必须完成它们各自的任务后，因此每个线程在完成它们的自己的任务后必须先等待。(这种场景也可以使用CyclicBarrier来处理)
+main线程监控着整个任务的工作状态，一旦所有的线程都处于等待的状态，那么main线程就调用线程组中的线程来中断其所包含的线程的等待，此时这些线程可以继续对执行结果进行检查并且处理。
+参考代码：com.panlingxiao.concurrency.thread.ThreadGroupInterruptTest
 
 
-### 中断线程组
+### 4.3 获取线程组中的线程
 
-
+我们可以使用ThreadGroup的activeCount()和enumerate(Thread[] tarray)来枚举出莹莹张
 
 参考:
 http://www.javaworld.com/article/2074481/java-concurrency/java-101--understanding-java-threads--part-4---thread-groups--volatility--and-threa.html
+ 
+ 
+### 4.4 实现一个简单的线程池
  
