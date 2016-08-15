@@ -47,21 +47,52 @@ public class ThreadGroupTest {
          * To prove that the subgroup 1 and subgroup 2 groups are main's only subgroups
          */
         ThreadGroup tg = new ThreadGroup("subgroup 1");
-        Thread t1 = new Thread(tg, "thread 1");
-        Thread t2 = new Thread(tg, "thread 2");
-        Thread t3 = new Thread(tg, "thread 3");
+        Runnable task = new Task();
+
+        Thread t1 = new Thread(tg, task,"thread 1");
+        Thread t2 = new Thread(tg, task,"thread 2");
+        Thread t3 = new Thread(tg, task,"thread 3");
 
         tg = new ThreadGroup("subgroup 2");
-        Thread t4 = new Thread(tg, "my thread");
+        Thread t4 = new Thread(tg, task,"my thread");
+
+        t1.start();
+        t2.start();
+        t3.start();
+        t4.start();
+
 
         //获取当前线程的线程组,即main的线程组
         tg = Thread.currentThread().getThreadGroup();
+
         //从main线程组中返回其包含活跃线程组数量，该值时一个预估值
         int agc = tg.activeGroupCount();
         System.out.println("Active thread groups in " + tg.getName() + " thread group: " + agc);
 
+
         //将线程组的信息输出,该方法适合于调式
+        //注意:只有在线程启动之后，才能从线程组中输出线程的信息
         tg.list();
 
+        ThreadGroup[] list = new ThreadGroup[agc];
+        tg.enumerate(list);
+
+        for(ThreadGroup group : list){
+            group.interrupt();
+        }
+
+    }
+
+    static class Task implements Runnable{
+        @Override
+        public void run() {
+            try {
+                synchronized (this){
+                    this.wait();
+                }
+            } catch (InterruptedException e) {
+                System.out.println(Thread.currentThread().getName()+" interrupt");
+            }
+        }
     }
 }

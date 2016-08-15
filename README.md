@@ -2,7 +2,7 @@
 
 >个人并发编程练习以及总结
 
-### [1、Thread 基础]()
+### [1、Thread 基础](https://github.com/plx927/Java-Concurrency-Practise/blob/master/thread-basic.MD)
 
 
 ### 源码分析start方法的本质以及分析两种实现方式的比较
