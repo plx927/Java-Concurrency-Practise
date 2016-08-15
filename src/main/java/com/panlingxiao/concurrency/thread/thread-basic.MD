@@ -1,5 +1,72 @@
 # Java多线程基础篇
 
+## 理解并发(Concurrent)和并行(Parallel)的区别
+- http://ifeve.com/parallel_and_con/
+- http://www.cnblogs.com/yangecnu/p/3164167.html
+
+## 线程的创建及执行原理分析
+
+### 继承Thread类
+第一种创建的方式是通过继承Thread类，重写Thread类的run()方法来完成线程的创建，代码如下:
+```
+class MyThread extends Thread{
+ 
+ @Override
+ public void run(){
+ 
+    executeSomething();
+ }
+}
+
+public static void main(String[]){
+  MyThread thread = new MyThread();
+  thread.start();
+}
+
+```
+参考代码：com.panlingxiao.concurrency.thread.CreateThreadTest
+
+
+### 实现Runnable接口
+第二中创建线程的是通过实现Runnable接口，将Runnable接口的实现类的实例作为参数传递给Thread对象。
+```
+    public MyTask implements Runnable{
+        public void run(){
+            doSomething();
+        }
+    }
+    
+    public static void main(String[] args){
+    
+        //作为参数传递给Thread来执行run方法中的代码
+        Thread t = new Thread(new MyTask());
+        t.start();
+    }
+        
+```
+参考代码：com.panlingxiao.concurrency.thread.CreateThreadTest2
+
+### 通过FutureTask和Callable
+在JDK1.5之前，由于Runnable接口的run()方法被设计成了无返回值，因此线程在执行完成后都无法将执行结果以返回值的形式返回。
+从1.5开始，在并发包中引入了Callable接口,Callable被设计成一个具有返回值并且可以抛出异常的执行任务。但是由于Thread类的
+执行逻辑必须存在于run()方法，我们所定义了Callable的实现类是无法被Thread所执行的。为了解决这个类型不兼容的问题，FutureTask出现了。
+FutureTask自身就是一个Runnable接口的实现类，其作用是可以将用户所设计的Callable接口的实现类包装成Runnable来交给Thread来执行。
+在这里，暂时先不对FutureTask做更多细致的分析，首先了解其简单的使用，后面将会对Future以及FutureTask的源码做详细的分析。
+参考代码：com.panlingxiao.concurrency.thread.CreateThreadTest3
+
+
+## 线程信息及线程状态
+
+
+
+### 线程状态----Java线程的生命周期
+参考:https://avaldes.com/java-thread-states-life-cycle-of-java-threads/
+
+
+
+
+
+
 
 ## ThreadGroup
 线程组的目的是为了降低对线程管理的复杂度，在Java中提供了`java.lang.ThreadGroup`来表示线程组。线程组由一组线程组成，初次以外，它还可以包含其他的线程组。

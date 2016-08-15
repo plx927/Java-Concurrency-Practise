@@ -2,49 +2,8 @@
 
 >个人并发编程练习以及总结
 
-## 1、Thread 基础
+### [1、Thread 基础]()
 
-### 理解并发(Concurrent)和并行(Parallel)的区别
-- http://ifeve.com/parallel_and_con/
-- http://www.cnblogs.com/yangecnu/p/3164167.html
-
-
-### 创建线程的两种方式
-
-#### 继承Thread类，重写run()方法
-
-```
-    class MyThread extends Thread{
-        @Override
-        public void run(){
-        
-          doSomething();
-        }
-    }
-    
-    public static void main(String[] args){
-        Thread t = new MyThread();
-        t.start();
-    }
-```
-
-#### 实现Runnable接口
-
-```
-    public MyTask implements Runnable{
-        public void run(){
-            doSomething();
-        }
-    }
-    
-    public static void main(String[] args){
-    
-        //作为参数传递给Thread来执行run方法中的代码
-        Thread t = new Thread(new MyTask());
-        t.start();
-    }
-        
-```
 
 ### 源码分析start方法的本质以及分析两种实现方式的比较
 
