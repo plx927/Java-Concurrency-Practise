@@ -11,7 +11,7 @@ public class SynVisablity {
     /**
      * 加入了synchronized关键字之后,可以确保线程能够实时地获取到临界区中的变量的最新值
      */
-    public static boolean getFlag(){
+    public static synchronized boolean getFlag(){
         return flag;
     }
 

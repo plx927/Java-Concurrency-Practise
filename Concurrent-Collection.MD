@@ -8,3 +8,5 @@
 ## ConcurrentLinkedQueue
 
 ## ConcurrentHashMap
+
+Debug调式出HashMap出现环状的情况。

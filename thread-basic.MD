@@ -134,11 +134,11 @@ main线程监控着整个任务的工作状态，一旦所有的线程都处于�
 
 
 ### 4.3 获取线程组中的线程
+我们可以使用ThreadGroup的activeCount()和enumerate(Thread[] tarray)来枚举出
 
-我们可以使用ThreadGroup的activeCount()和enumerate(Thread[] tarray)来枚举出莹莹张
+参考文章:
 
-参考:
-http://www.javaworld.com/article/2074481/java-concurrency/java-101--understanding-java-threads--part-4---thread-groups--volatility--and-threa.html
+- http://www.javaworld.com/article/2074481/java-concurrency/java-101--understanding-java-threads--part-4---thread-groups--volatility--and-threa.html
  
  
 ### 4.4 实现一个简单的线程池
