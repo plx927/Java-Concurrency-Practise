@@ -25,20 +25,22 @@ public class UnsafeTest {
         //获取数组中每个元素的大小
         int indexScale = u.arrayIndexScale(a.getClass());
         System.out.println("baseOffset:" + baseOffset);
-        System.out.println("indexScale:" + indexScale);
+        System.out.println("indexScale:" + indexScale);//4
 
 
         baseOffset = u.arrayBaseOffset(String[].class);
         indexScale = u.arrayIndexScale(String[].class);
         System.out.println("baseOffset:" + baseOffset);
-        System.out.println("indexScale:" + indexScale);
+
+        //这里是4是因为引用数据类型底层的指针占用了4个字节
+        System.out.println("indexScale:" + indexScale); //4
 
 
 
         baseOffset = u.arrayBaseOffset(double[].class);
         indexScale = u.arrayIndexScale(double[].class);
         System.out.println("baseOffset:" + baseOffset);
-        System.out.println("indexScale:" + indexScale);
+        System.out.println("indexScale:" + indexScale); //8
 
     }
 
