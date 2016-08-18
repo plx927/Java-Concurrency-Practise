@@ -34,7 +34,7 @@ public class UnsafeTest {
         indexScale = u.arrayIndexScale(String[].class);
         System.out.println("String[] baseOffset:" + baseOffset);
 
-        //这里是4是因为引用数据类型底层的指针占用了4个字节
+        //这里是4是比例因子(scale factor),即数组中每个元素的大小规模
         System.out.println("String[] indexScale:" + indexScale); //4
 
 
