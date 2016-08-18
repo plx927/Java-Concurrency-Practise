@@ -28,3 +28,8 @@ volatile关键字修饰共享变量，即使写线程(T2)修改了变量的值�
 
 - http://www.javaworld.com/article/2074481/java-concurrency/java-101--understanding-java-threads--part-4---thread-groups--volatility--and-threa.html?page=2
 
+### Unsafe
+
+参考文章：
+- http://mishadoff.com/blog/java-magic-part-4-sun-dot-misc-dot-unsafe/
+- http://ifeve.com/sun-misc-unsafe/
