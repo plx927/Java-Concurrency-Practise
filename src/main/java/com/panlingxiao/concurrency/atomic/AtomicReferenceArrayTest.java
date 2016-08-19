@@ -13,11 +13,17 @@ public class AtomicReferenceArrayTest {
     public static void main(String[] args) {
 
         AtomicReferenceArray<String> array = new AtomicReferenceArray<String>(10);
+
+
+        array.set(5,"hello");
+
         //scale:4,对应二进制000...100,前面为29个0.
         int scale = UnsafeTest.UnsafeUtil.getUnsafe().arrayIndexScale(Object[].class);
         int shift = 31 - Integer.numberOfLeadingZeros(scale);
         System.out.println("scale:"+scale+",shift:"+shift);
-
         System.out.println(1 << shift);
+
+
+
     }
 }
